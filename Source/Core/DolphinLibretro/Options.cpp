@@ -1,4 +1,4 @@
-
+﻿
 #include <libretro.h>
 
 #include "DolphinLibretro/Options.h"
@@ -145,26 +145,26 @@ bool Option<T>::Updated()
   return false;
 }
 
-Option<int> efbScale("dolphin_efb_scale", "EFB Scale", 1,
+Option<int> efbScale("dolphin_efb_scale", "EFB缩放", 1,
                      {"x1 (640 x 528)", "x2 (1280 x 1056)", "x3 (1920 x 1584)", "x4 (2560 * 2112)",
                       "x5 (3200 x 2640)", "x6 (3840 x 3168)"});
-Option<int> irMode("dolphin_ir_mode", "Wiimote IR Mode", 1,
-                     {"Right Stick controls pointer (relative)", "Right Stick controls pointer (absolute)", "Mouse controls pointer"});
-Option<int> irCenter("dolphin_ir_center", "Wiimote IR Center",
+Option<int> irMode("dolphin_ir_mode", "Wiimote IR模式", 1,
+                     {"右手柄控制指针（相对模式）", "右手柄控制指针（绝对模式）", "鼠标控制指针"});
+Option<int> irCenter("dolphin_ir_center", "Wiimote IR中心",
   { {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80}, {"90", 90}, {"100", 100}, {"0", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40} });
-Option<int> irWidth("dolphin_ir_width", "Wiimote IR Width",
+Option<int> irWidth("dolphin_ir_width", "Wiimote IR宽度",
   { {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80}, {"90", 90}, {"100", 100}, {"0", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40} });
-Option<int> irHeight("dolphin_ir_height", "Wiimote IR Height",
+Option<int> irHeight("dolphin_ir_height", "Wiimote IR高度",
   { {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80}, {"90", 90}, {"100", 100}, {"0", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40} });
-Option<LogTypes::LOG_LEVELS> logLevel("dolphin_log_level", "Log Level",
-                                      {{"Info", LogTypes::LINFO},
+Option<LogTypes::LOG_LEVELS> logLevel("dolphin_log_level", "日志级别",
+                                      {{"信息", LogTypes::LINFO},
 #if defined(_DEBUG) || defined(DEBUGFAST)
-                                       {"Debug", LogTypes::LDEBUG},
+                                       {"调试", LogTypes::LDEBUG},
 #endif
-                                       {"Notice", LogTypes::LNOTICE},
-                                       {"Error", LogTypes::LERROR},
-                                       {"Warning", LogTypes::LWARNING}});
-Option<float> cpuClockRate("dolphin_cpu_clock_rate", "CPU Clock Rate",
+                                       {"通知", LogTypes::LNOTICE},
+                                       {"错误", LogTypes::LERROR},
+                                       {"警告", LogTypes::LWARNING}});
+Option<float> cpuClockRate("dolphin_cpu_clock_rate", "CPU时钟",
                            {{"100%", 1.0},
                             {"150%", 1.5},
                             {"200%", 2.0},
@@ -180,60 +180,60 @@ Option<float> cpuClockRate("dolphin_cpu_clock_rate", "CPU Clock Rate",
                             {"70%", 0.7},
                             {"80%", 0.8},
                             {"90%", 0.9}});
-Option<std::string> renderer("dolphin_renderer", "Renderer", {"Hardware", "Software", "Null"});
+Option<std::string> renderer("dolphin_renderer", "渲染器", {{"硬件","Hardware"}, {"软件","Software"}, {"无","Null"}});
 #ifdef ANDROID
-Option<bool> fastmem("dolphin_fastmem", "Fastmem", false);
+Option<bool> fastmem("dolphin_fastmem", "快速内存", false);
 #else
-Option<bool> fastmem("dolphin_fastmem", "Fastmem", true);
+Option<bool> fastmem("dolphin_fastmem", "快速内存", true);
 #endif
-Option<bool> DSPHLE("dolphin_dsp_hle", "DSP HLE", true);
-Option<bool> DSPEnableJIT("dolphin_dsp_jit", "DSP Enable JIT", true);
-Option<PowerPC::CPUCore> cpu_core("dolphin_cpu_core", "CPU Core",
+Option<bool> DSPHLE("dolphin_dsp_hle", "高级模拟DSP", true);
+Option<bool> DSPEnableJIT("dolphin_dsp_jit", "启用即时重编译DSP", true);
+Option<PowerPC::CPUCore> cpu_core("dolphin_cpu_core", "CPU内核",
                                   {
 #ifdef _M_X86
-                                      {"JIT64", PowerPC::CPUCore::JIT64},
+                                      {"64位即时重编译器", PowerPC::CPUCore::JIT64},
 #elif _M_ARM_64
-                                      {"JITARM64", PowerPC::CPUCore::JITARM64},
+                                      {"64位ARM即时重编译器", PowerPC::CPUCore::JITARM64},
 #endif
-                                      {"Interpreter", PowerPC::CPUCore::Interpreter},
-                                      {"Cached Interpreter", PowerPC::CPUCore::CachedInterpreter}});
-Option<DiscIO::Language> Language("dolphin_language", "Language",
-                                  {{"English", DiscIO::Language::English},
-                                   {"Japanese", DiscIO::Language::Japanese},
-                                   {"German", DiscIO::Language::German},
-                                   {"French", DiscIO::Language::French},
-                                   {"Spanish", DiscIO::Language::Spanish},
-                                   {"Italian", DiscIO::Language::Italian},
-                                   {"Dutch", DiscIO::Language::Dutch},
-                                   {"Simplified Chinese", DiscIO::Language::SimplifiedChinese},
-                                   {"Traditional Chinese", DiscIO::Language::TraditionalChinese},
-                                   {"Korean", DiscIO::Language::Korean}});
-Option<bool> Widescreen("dolphin_widescreen", "Widescreen", true);
-Option<bool> WidescreenHack("dolphin_widescreen_hack", "WideScreen Hack", false);
-Option<bool> progressiveScan("dolphin_progressive_scan", "Progressive Scan", true);
+                                      {"解释器", PowerPC::CPUCore::Interpreter},
+                                      {"缓存解释器", PowerPC::CPUCore::CachedInterpreter}});
+Option<DiscIO::Language> Language("dolphin_language", "语言",
+                                  {{"英语", DiscIO::Language::English},
+                                   {"日语", DiscIO::Language::Japanese},
+                                   {"德语", DiscIO::Language::German},
+                                   {"法语", DiscIO::Language::French},
+                                   {"西班牙语", DiscIO::Language::Spanish},
+                                   {"意大利语", DiscIO::Language::Italian},
+                                   {"荷兰语", DiscIO::Language::Dutch},
+                                   {"简体中文", DiscIO::Language::SimplifiedChinese},
+                                   {"繁体中文", DiscIO::Language::TraditionalChinese},
+                                   {"韩语", DiscIO::Language::Korean}});
+Option<bool> Widescreen("dolphin_widescreen", "宽屏", true);
+Option<bool> WidescreenHack("dolphin_widescreen_hack", "宽屏补丁", false);
+Option<bool> progressiveScan("dolphin_progressive_scan", "逐行扫描", true);
 Option<bool> pal60("dolphin_pal60", "PAL60", true);
-Option<u32> sensorBarPosition("dolphin_sensor_bar_position", "Sensor Bar Position",
-                              {"Bottom", "Top"});
-Option<bool> bluetoothContinuousScan("dolphin_bt_continuous_scan", "Bluetooth scan", {"Off", "Continuous"});
-Option<unsigned int> audioMixerRate("dolphin_mixer_rate", "Audio Mixer Rate",
+Option<u32> sensorBarPosition("dolphin_sensor_bar_position", "感应条位置",
+                              {"底部", "顶部"});
+Option<bool> bluetoothContinuousScan("dolphin_bt_continuous_scan", "蓝牙扫描", {"关闭", "持续"});
+Option<unsigned int> audioMixerRate("dolphin_mixer_rate", "音频混音器采样率",
                                     {{"32000", 32000u}, {"48000", 48000u}});
 Option<ShaderCompilationMode> shaderCompilationMode(
-    "dolphin_shader_compilation_mode", "Shader Compilation Mode",
-    {{"sync", ShaderCompilationMode::Synchronous},
-     {"a-sync Skip Rendering", ShaderCompilationMode::AsynchronousSkipRendering},
-     {"sync UberShaders", ShaderCompilationMode::SynchronousUberShaders},
-     {"a-sync UberShaders", ShaderCompilationMode::AsynchronousUberShaders}});
-Option<int> maxAnisotropy("dolphin_max_anisotropy", "Max Anisotropy", 0, 17);
-Option<bool> efbScaledCopy("dolphin_efb_scaled_copy", "Scaled EFB Copy", true);
-Option<bool> efbToTexture("dolphin_efb_to_texture", "Store EFB Copies on GPU", true);
-Option<bool> efbToVram("dolphin_efb_to_vram", "Disable EFB to VRAM", false);
-Option<bool> bboxEnabled("dolphin_bbox_enabled", "Bounding Box Emulation", false);
-Option<bool> gpuTextureDecoding("dolphin_gpu_texture_decoding", "GPU Texture Decoding", false);
-Option<bool> waitForShaders("dolphin_wait_for_shaders", "Wait for Shaders before Starting", false);
-Option<bool> forceTextureFiltering("dolphin_force_texture_filtering", "Force Texture Filtering", false);
-Option<bool> loadCustomTextures("dolphin_load_custom_textures", "Load Custom Textures", false);
-Option<bool> cheatsEnabled("dolphin_cheats_enabled", "Internal Cheats Enabled", false);
-Option<int> textureCacheAccuracy("dolphin_texture_cache_accuracy", "Texture Cache Accuracy",
-                                 {{"Fast", 128}, {"Middle", 512}, {"Safe", 0}});
+    "dolphin_shader_compilation_mode", "着色器编译模式",
+    {{"同步", ShaderCompilationMode::Synchronous},
+     {"异步跳过渲染", ShaderCompilationMode::AsynchronousSkipRendering},
+     {"同步UberShaders", ShaderCompilationMode::SynchronousUberShaders},
+     {"异步UberShaders", ShaderCompilationMode::AsynchronousUberShaders}});
+Option<int> maxAnisotropy("dolphin_max_anisotropy", "最大各向异性过滤", 0, 17);
+Option<bool> efbScaledCopy("dolphin_efb_scaled_copy", "缩放EFB拷贝", true);
+Option<bool> efbToTexture("dolphin_efb_to_texture", "在GPU中存储EFB拷贝", true);
+Option<bool> efbToVram("dolphin_efb_to_vram", "禁用拷贝EFB到VRAM", false);
+Option<bool> bboxEnabled("dolphin_bbox_enabled", "边界框模拟", false);
+Option<bool> gpuTextureDecoding("dolphin_gpu_texture_decoding", "GPU纹理解码", false);
+Option<bool> waitForShaders("dolphin_wait_for_shaders", "在开始之前等待着色器", false);
+Option<bool> forceTextureFiltering("dolphin_force_texture_filtering", "强制纹理过滤", false);
+Option<bool> loadCustomTextures("dolphin_load_custom_textures", "载入自定义纹理", false);
+Option<bool> cheatsEnabled("dolphin_cheats_enabled", "启用内部金手指", false);
+Option<int> textureCacheAccuracy("dolphin_texture_cache_accuracy", "纹理缓存精度",
+                                 {{"快速", 128}, {"中等", 512}, {"安全", 0}});
 }  // namespace Options
 }  // namespace Libretro
